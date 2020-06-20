@@ -35,8 +35,7 @@ namespace Hotukdeal
                 string link = items[i].SelectSingleNode("link").InnerText;
                 string price = "free";
 
-                // store each deal information to seperate dictonary
-                Dictionary<string, string> feedInfo = new Dictionary<string, string>();
+        
 
                 feedInfo.Add("description", description);
                 feedInfo.Add("link", link);
