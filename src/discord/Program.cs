@@ -17,15 +17,16 @@ namespace discord
     }
 
 
-        Hotukdeals hotUKDeal;
+        HotUkDealRssReader hotUKDeal;
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
         public async Task MainAsync()
         {
             
             _client = new DiscordSocketClient();
 
-            hotUKDeal = new  Hotukdeals();
+            hotUKDeal = new  HotUkDealRssReader();
 
+            hotUKDeal.hotukdeals();
 
            
 

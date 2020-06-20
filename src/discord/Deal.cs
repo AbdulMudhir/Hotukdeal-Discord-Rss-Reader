@@ -15,6 +15,10 @@ namespace Hotukdeal
         private string _link;
 
 
+        private string _merchantName;
+
+
+
         private string _description;
 
         private string _imageLink;
@@ -25,8 +29,9 @@ namespace Hotukdeal
         public string Link { get => _link; set => _link = value; }
         public string Description { get => _description; set => _description = value; }
         public string ImageLink { get => _imageLink; set => _imageLink = value; }
+        public string MerchantName { get => _merchantName; set => _merchantName = value; }
 
-        public Deal(string name, string price, string category, string link, string description, string imageLink)
+        public Deal(string name, string price, string category, string link, string description, string imageLink, string merchantName)
         {
             this.Name = name;
             this.Price = price;
@@ -34,6 +39,7 @@ namespace Hotukdeal
             this.Link = link;
             this.Description= description ;
             this.ImageLink = imageLink;
+            this.MerchantName = merchantName;
 
 
 

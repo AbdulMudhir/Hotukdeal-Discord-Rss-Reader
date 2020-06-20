@@ -32,11 +32,35 @@ namespace Hotukdeal
                 string title = item.SelectSingleNode("title").InnerText;
                 string description = item.SelectSingleNode("description").InnerText;
                 string link = item.SelectSingleNode("link").InnerText;
-                string category = "test";
-                string price = "free";
+                string category = item.SelectSingleNode("category").InnerText;
+                try{
+
+                    var merchantInfo = item["pepper:merchant"].Attributes;
+
+                    string merchantName = merchantInfo["name"].Value;
+
+                    string merchantPrice = merchantInfo["price"].Value;
+
+                    Console.WriteLine(merchantPrice);
+
+
+                }
+                catch(NullReferenceException e)
+                {
+                    string merchantName = "None";
+                    string merchantPrice = "None";
+
+                    Console.WriteLine("Merchant Info Does not exist");
+                }
+            
+
+        
+
+                
+
                 string imageLink = "test";
                                        
-                 Deal deal = new Deal(title, price, category, link, description, imageLink);
+                 Deal deal = new Deal(title, price, category, link, description, imageLink, merchantName);
 
 
             return deal;

@@ -41,9 +41,11 @@ namespace discord.Test
             String firstItemName = deal.Name;
 
             string link = deal.Link;
+            // check if the first deal is similar to one to rss
+            // Assert.Equal("1,000 free audiobooks @ Open Culture",firstItemName);
+            // Assert.Equal("https://www.hotukdeals.com/deals/1000-free-audiobooks-3490202", link);
 
-            Assert.Equal("1,000 free audiobooks @ Open Culture",firstItemName);
-            Assert.Equal("https://www.hotukdeals.com/deals/1000-free-audiobooks-3490202", link);
+            Assert.Equal("£14.99", deal.Price);
 
         }
 

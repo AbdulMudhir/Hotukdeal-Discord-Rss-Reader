@@ -15,10 +15,6 @@ namespace Hotukdeal
         public int Total{get{return deals.Count;}}
 
 
-    public Hotukdeals()
-    {
-
-    }
 
         public void addDeal(Deal deal)
         {
