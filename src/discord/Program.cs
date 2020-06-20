@@ -4,6 +4,7 @@ using System.Xml;
 using Discord;
 using Discord.WebSocket;
 using System.Collections.Generic;
+using Hotukdeal;
 
 namespace discord
 {    class Program
@@ -11,17 +12,19 @@ namespace discord
 
         
     private DiscordSocketClient _client;
-    const string TOKEN = Environment.GetEnvironmentVariable("csharptoken");
+    private string TOKEN{
+        get{return Environment.GetEnvironmentVariable("csharptoken");}
+    }
 
 
-         HotUKDeal hotUKDeal;
+        Hotukdeals hotUKDeal;
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
         public async Task MainAsync()
         {
             
             _client = new DiscordSocketClient();
 
-            hotUKDeal = new HotUKDeal();
+            hotUKDeal = new  Hotukdeals();
 
 
            
@@ -47,16 +50,9 @@ namespace discord
         private async Task MessageReceived(SocketMessage message)
         {
 
-             Dictionary<string, Dictionary<string, string>> feed = hotUKDeal.Deals;
-
-             Dictionary<string, Dictionary<string, string>>.KeyCollection titles = feed.Keys;
+          
 
             if(!message.Author.IsBot){
-                
-
-                foreach(string title in titles){
-                await message.Channel.SendMessageAsync(title);
-                }
                 
                
             }

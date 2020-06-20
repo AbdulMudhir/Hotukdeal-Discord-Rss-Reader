@@ -1,42 +1,32 @@
 using System;
 using Xunit;
 using System.Xml;
+using Hotukdeal;
 using System.Collections.Generic;
 
 namespace discord.Test
 {
     public class HotUKDealRssTest
     {
-        const string HOTUKDEALRSSURL = "https://www.hotukdeals.com/rss/all";
 
         [Fact]
         public void RssFeedCount()
         {
             
-        
-            // HotUKDeal hotUKDeal = new HotUKDeal();
+            
+            HotUkDealRssReader hotUKDealRss = new HotUkDealRssReader();
 
-            // Assert.Equal(20,hotUKDeal.rssNodes.Count);
+            Hotukdeals hotukdeals = hotUKDealRss.hotukdeals();
+
+            int totalDeal =  hotukdeals.Total;
+
+            // should recieve 20 feed from RSS
+            Assert.Equal(20, totalDeal);
+
 
             
         }
 
-         [Fact]
-        public void RssFeedFirstChild()
-        {
-            
-        
-           RssReader rssReader = new RssReader(HOTUKDEALRSSURL);
 
-            Dictionary<string, Dictionary<string, string>> content = rssReader.parseRss();
-
-
-
-            // check first child title
-
-           
-            
-
-        }
     }
 }
