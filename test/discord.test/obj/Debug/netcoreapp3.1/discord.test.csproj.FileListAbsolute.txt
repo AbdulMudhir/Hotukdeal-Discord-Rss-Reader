@@ -104,3 +104,4 @@ C:\Users\Abdul\discordBot\test\discord.test\obj\Debug\netcoreapp3.1\discord.test
 C:\Users\Abdul\discordBot\test\discord.test\obj\Debug\netcoreapp3.1\discord.test.dll
 C:\Users\Abdul\discordBot\test\discord.test\obj\Debug\netcoreapp3.1\discord.test.pdb
 C:\Users\Abdul\discordBot\test\discord.test\obj\Debug\netcoreapp3.1\discord.test.genruntimeconfig.cache
+C:\Users\Abdul\discordBot\test\discord.test\bin\Debug\netcoreapp3.1\HtmlAgilityPack.dll

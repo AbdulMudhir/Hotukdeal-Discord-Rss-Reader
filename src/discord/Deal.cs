@@ -30,34 +30,38 @@ namespace Hotukdeal
 
         private string _comments;
 
-        public string Name { get => _name; set => _name = value; }
-        public string Price { get => _price; set => _price = value; }
-        public string Category { get => _category; set => _category = value; }
-        public string Link { get => _link; set => _link = value; }
-        public string Description { get => _description; set => _description = value; }
-        public string ImageLink { get => _imageLink; set => _imageLink = value; }
-        public string MerchantName { get => _merchantName; set => _merchantName = value; }
-        public string DirectLink { get => _directLink; set => _directLink = value; }
-        public string HotMeter { get => _hotMeter; set => _hotMeter = value; }
-        public string Comments { get => _comments; set => _comments = value; }
 
-        public Deal(string name, string price, string category, string link, string description, string imageLink, string merchantName, string directLink)
+        public string Name { get => _name;  }
+        public string Price { get => _price; }
+
+
+        public string Category { get => _category; }
+        public string Link { get => _link;  }
+        public string Description { get => _description;  }
+        public string ImageLink { get => _imageLink;  }
+        public string MerchantName { get => _merchantName; }
+        public string DirectLink { get => _directLink; }
+        public string HotMeter { get => _hotMeter; }
+        public string Comments { get => _comments; }
+
+
+        
+        public Deal(string name, string price, string category, string link, string merchantName, string directLink, string description, string imageLink, string hotMeter, string comments)
         {
-            this.Name = name;
-            this.Price = price;
-            this.Category = category;
-            this.Link = link;
-            this.Description= description ;
-            this.ImageLink = imageLink;
-            this.MerchantName = merchantName;
-            this.DirectLink = directLink;
-
-
-
-
+            _name = name;
+            _price = price;
+            _category = category;
+            _link = link;
+            _merchantName = merchantName;
+            _directLink = directLink;
+            _description = description;
+            _imageLink = imageLink;
+            _hotMeter = hotMeter;
+            _comments = comments;
         }
 
-
+  
+        
 
 
     }

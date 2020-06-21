@@ -14,17 +14,22 @@ namespace Hotukdeal
 
 
         HtmlWeb web;
+        HtmlDocument page ;
+
         public HotukdealScraper(string hotukdealUrl)
         {
 
             web = new HtmlWeb();
 
-            var page = web.Load(hotukdealUrl);
+            page = web.Load(hotukdealUrl);
 
 
+        }
+
+        public void scrape()
+        {
             var deals = page.DocumentNode.SelectNodes("//*[@class='threadGrid']");
-
-
+            
             foreach (var deal in deals)
             {      // check if the title is not null otherwise skip it
                 if (validDeal(deal))
@@ -70,8 +75,6 @@ namespace Hotukdeal
 
 
             }
-
-
 
 
         }

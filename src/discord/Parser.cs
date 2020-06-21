@@ -84,7 +84,17 @@ namespace Parse
                 string imageLink = item["media:content"].Attributes["url"].Value;
         
                                        
-                 Deal deal = new Deal(title, price, category, link, description, imageLink, merchantName, directLink);
+                 Deal deal = new DealBuilder()
+                 .Name(title)
+                 .Price(price)
+                 .Category(category)
+                 .Link(link)
+                 .Description(description)
+                 .ImageLink(imageLink)
+                 .MerchantName(merchantName)
+                 .DirectLink(directLink)
+                 .Build();
+                 
 
 
             return deal;
