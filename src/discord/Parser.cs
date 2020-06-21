@@ -56,7 +56,7 @@ namespace Parse
                 string description = Parser.removeHTMLElementFromRSS(item.SelectSingleNode("description").InnerText);
                 string link = item.SelectSingleNode("link").InnerText;
                 string category = item.SelectSingleNode("category").InnerText;
-
+                string directLink = getDirectLink(link);
                 string merchantName;
                 string price;
                 // need to fix this as not all return nulls
@@ -74,8 +74,8 @@ namespace Parse
                 }
                 catch(NullReferenceException e)
                 {
-                    merchantName = "";
-                    price = "";
+                    merchantName = "None";
+                    price = "None";
 
                     Console.WriteLine($"{nameof(e)} Does not exist ");
                 }
@@ -84,7 +84,7 @@ namespace Parse
                 string imageLink = item["media:content"].Attributes["url"].Value;
         
                                        
-                 Deal deal = new Deal(title, price, category, link, description, imageLink, merchantName, "");
+                 Deal deal = new Deal(title, price, category, link, description, imageLink, merchantName, directLink);
 
 
             return deal;

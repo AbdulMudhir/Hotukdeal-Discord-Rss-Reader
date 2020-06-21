@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v3.1": {
       "discord/1.0.0": {
         "dependencies": {
-          "Discord.Net": "2.2.0"
+          "Discord.Net": "2.2.0",
+          "HtmlAgilityPack": "1.11.24"
         },
         "runtime": {
           "discord.dll": {}
@@ -79,6 +80,14 @@
           "lib/netstandard2.1/Discord.Net.WebSocket.dll": {
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.0.0"
+          }
+        }
+      },
+      "HtmlAgilityPack/1.11.24": {
+        "runtime": {
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "assemblyVersion": "1.11.24.0",
+            "fileVersion": "1.11.24.0"
           }
         }
       },
@@ -269,6 +278,13 @@
       "sha512": "sha512-jZb/Ae5w0K0dnGQETcSJu0qA3j5vgG7Dtl27pAkiug90omFs5SB20WNReo25WoJuidPAa6gmaBEWm5RPaBghXw==",
       "path": "discord.net.websocket/2.2.0",
       "hashPath": "discord.net.websocket.2.2.0.nupkg.sha512"
+    },
+    "HtmlAgilityPack/1.11.24": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DLcytINO8EfCdBgMGsaz8Tvdgu2Aewoo2XX7WfZuRG9cBQRtbm8JZ4/sMRtFvzehjdIDqubdlQb8TqNfjRMEWg==",
+      "path": "htmlagilitypack/1.11.24",
+      "hashPath": "htmlagilitypack.1.11.24.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

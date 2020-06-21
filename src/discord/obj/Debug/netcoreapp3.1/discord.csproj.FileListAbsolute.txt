@@ -20,3 +20,4 @@ C:\Users\Abdul\discordBot\src\discord\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dl
 C:\Users\Abdul\discordBot\src\discord\bin\Debug\netcoreapp3.1\System.Interactive.Async.dll
 C:\Users\Abdul\discordBot\src\discord\bin\Debug\netcoreapp3.1\System.Linq.Async.dll
 C:\Users\Abdul\discordBot\src\discord\obj\Debug\netcoreapp3.1\discord.csproj.CopyComplete
+C:\Users\Abdul\discordBot\src\discord\bin\Debug\netcoreapp3.1\HtmlAgilityPack.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JSnhieRO0pyxYWMMHJE2dPXXzX9OjWv+MIxtjTM8dzTu66cNKZwPgabf9VxnTZjkjqy9qfdUIk4SqNR5ydZbkw==",
+  "dgSpecHash": "QuiCuxDrbmkJEBBCfdFPzO/Ey3Vg8Y1YsDC2OnSYSifAiiKrTJrI/lwxMgVHfiaQxK/eI5v6rqlBoM5K/NpGpg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Abdul\\discordBot\\src\\discord\\discord.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\Abdul\\.nuget\\packages\\discord.net.rest\\2.2.0\\discord.net.rest.2.2.0.nupkg.sha512",
     "C:\\Users\\Abdul\\.nuget\\packages\\discord.net.webhook\\2.2.0\\discord.net.webhook.2.2.0.nupkg.sha512",
     "C:\\Users\\Abdul\\.nuget\\packages\\discord.net.websocket\\2.2.0\\discord.net.websocket.2.2.0.nupkg.sha512",
+    "C:\\Users\\Abdul\\.nuget\\packages\\htmlagilitypack\\1.11.24\\htmlagilitypack.1.11.24.nupkg.sha512",
     "C:\\Users\\Abdul\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Abdul\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Abdul\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
