@@ -19,9 +19,6 @@ namespace discord.Test
                   Hotukdeals hotukdeals = hotUKDealRss.hotukdeals();
 
 
-           
-
-          
             int totalDeal =  hotukdeals.Total;
 
             // should recieve 20 feed from RSS

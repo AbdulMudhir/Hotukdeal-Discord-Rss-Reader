@@ -15,7 +15,6 @@ namespace Hotukdeal
         // will be use to retreive an deal object. will be parsing all the deal item ehre
         
 
-
         public  HotUkDealRssReader()
         {
 
@@ -36,16 +35,16 @@ namespace Hotukdeal
 
                 string merchantName;
                 string price;
-
+                // need to fix this as not all return nulls
                 try{
 
                     var merchantInfo = item["pepper:merchant"].Attributes;
+
 
                     merchantName = merchantInfo["name"].Value;
 
                     price = merchantInfo["price"].Value;
 
-                    Console.WriteLine(price);
 
 
                 }

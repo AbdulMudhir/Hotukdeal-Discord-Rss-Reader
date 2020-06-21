@@ -13,7 +13,17 @@ namespace discord
         
     private DiscordSocketClient _client;
     private string TOKEN{
-        get{return Environment.GetEnvironmentVariable("csharptoken");}
+        get{
+            
+            string  token = Environment.GetEnvironmentVariable("csharptoken");
+
+            if (String.IsNullOrEmpty(token))
+            {
+                throw new ArgumentNullException("Token Key not found on environment");
+            }
+            
+            
+            return token ;}
     }
 
 
@@ -26,12 +36,12 @@ namespace discord
 
             hotUKDeal = new  HotUkDealRssReader();
 
-            hotUKDeal.hotukdeals();
 
            
 
             _client.Log += Log;
             _client.MessageReceived += MessageReceived;
+
 
             await _client.LoginAsync(TokenType.Bot,TOKEN);
             await _client.StartAsync();
@@ -54,6 +64,17 @@ namespace discord
           
 
             if(!message.Author.IsBot){
+
+                
+                var deals = hotUKDeal.hotukdeals().deals;
+
+                foreach(Deal deal in deals)
+                {
+                    message.Channel.SendMessageAsync($"{deal.Name}\n{deal.Price}\n{deal.MerchantName}");
+                }
+
+                
+            
                 
                
             }
