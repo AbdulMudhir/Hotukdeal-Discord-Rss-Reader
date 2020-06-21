@@ -17,6 +17,9 @@ namespace Hotukdeal
 
         private string _merchantName;
 
+        private string _directLink;
+        
+
 
 
         private string _description;
@@ -30,8 +33,9 @@ namespace Hotukdeal
         public string Description { get => _description; set => _description = value; }
         public string ImageLink { get => _imageLink; set => _imageLink = value; }
         public string MerchantName { get => _merchantName; set => _merchantName = value; }
+        public string DirectLink { get => _directLink; set => _directLink = value; }
 
-        public Deal(string name, string price, string category, string link, string description, string imageLink, string merchantName)
+        public Deal(string name, string price, string category, string link, string description, string imageLink, string merchantName, string directLink)
         {
             this.Name = name;
             this.Price = price;
@@ -40,6 +44,7 @@ namespace Hotukdeal
             this.Description= description ;
             this.ImageLink = imageLink;
             this.MerchantName = merchantName;
+            this.DirectLink = directLink;
 
 
 

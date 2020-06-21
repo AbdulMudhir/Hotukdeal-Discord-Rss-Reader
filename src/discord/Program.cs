@@ -69,8 +69,19 @@ namespace discord
                 var deals = hotUKDeal.hotukdeals().deals;
 
                 foreach(Deal deal in deals)
-                {
-                    message.Channel.SendMessageAsync($"{deal.Name}\n{deal.Price}\n{deal.MerchantName}");
+                
+                {   
+                    var embed = new EmbedBuilder()
+                    {
+                        Title = deal.Name,
+                        Url = deal.Link,
+                        Description = deal.Description,
+                        Color = Color.Green,
+                        ThumbnailUrl = deal.ImageLink,
+
+                    }.Build();
+                    
+                    message.Channel.SendMessageAsync(embed: embed);
                 }
 
                 

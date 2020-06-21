@@ -1,6 +1,7 @@
 using System.Xml;
 using System.Collections.Generic;
 using System;
+using System.Text.RegularExpressions;
 namespace Hotukdeal
 {
 
@@ -22,14 +23,46 @@ namespace Hotukdeal
             
         }
 
+
+        public string removeHTMLElementFromRSS(string description)
+        {   
+           
+            // shortened version
+            int limitDescription = 100;
+        
+            string result = Regex.Replace(description, @"<[^>]*>", " ");
+
+
+            if(result.Length > limitDescription)
+            {
+                result =  result.Substring(0, limitDescription);
+
+            }
+
+
+
+            return result.Trim();
+        }
+        
+    
         
 
+        public string getDirectLink(string url)
+        {
+             string baseDirectLink = "https://www.hotukdeals.com/visit/thread/";
+            
+
+            return "str";
+        }
+
+
+        
         private Deal parseRssItem(XmlNode item)
         {   
            
             
                 string title = item.SelectSingleNode("title").InnerText;
-                string description = item.SelectSingleNode("description").InnerText;
+                string description = removeHTMLElementFromRSS(item.SelectSingleNode("description").InnerText);
                 string link = item.SelectSingleNode("link").InnerText;
                 string category = item.SelectSingleNode("category").InnerText;
 
@@ -53,14 +86,14 @@ namespace Hotukdeal
                     merchantName = "";
                     price = "";
 
-                    Console.WriteLine("Merchant Info Does not exist");
+                    Console.WriteLine($"{nameof(e)} Does not exist ");
                 }
             
 
                 string imageLink = item["media:content"].Attributes["url"].Value;
         
                                        
-                 Deal deal = new Deal(title, price, category, link, description, imageLink, merchantName);
+                 Deal deal = new Deal(title, price, category, link, description, imageLink, merchantName, "");
 
 
             return deal;
