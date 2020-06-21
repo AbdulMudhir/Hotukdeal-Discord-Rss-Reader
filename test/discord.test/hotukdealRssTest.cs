@@ -45,7 +45,9 @@ namespace discord.Test
             // Assert.Equal("1,000 free audiobooks @ Open Culture",firstItemName);
             // Assert.Equal("https://www.hotukdeals.com/deals/1000-free-audiobooks-3490202", link);
 
-            Assert.Equal("£14.99", deal.Price);
+            Assert.Equal("£100.64", deal.Price);
+            Assert.Equal("Amazon", deal.MerchantName);
+            Assert.Equal("https://images.hotukdeals.com/threads/thread_list_big/default/3490255_1.jpg", deal.ImageLink);
 
         }
 
