@@ -27,6 +27,10 @@ namespace Hotukdeal
 
         private string _comments;
 
+        private string _postedDate;
+
+        private string _madeHot;
+
     public DealBuilder Name(string name)
     {
 
@@ -90,9 +94,21 @@ namespace Hotukdeal
         return this;
     }
 
+    public DealBuilder PostedDate(string postedDate)
+    {
+        _postedDate = postedDate;
+        return this;
+    }
+
+     public DealBuilder MadeHot(string madeHot)
+    {
+        _madeHot = madeHot;
+        return this;
+    }
+
     public Deal Build()
     {
-        Deal deal = new Deal(_name, _price, _category, _link, _description, _imageLink, _merchantName, _directLink, _hotMeter, _comments);
+        Deal deal = new Deal(_name, _price, _category, _link, _description, _imageLink, _merchantName, _directLink, _hotMeter, _comments, _postedDate, _madeHot);
         return deal;
 
     }

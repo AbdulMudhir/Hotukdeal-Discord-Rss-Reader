@@ -30,6 +30,11 @@ namespace Hotukdeal
 
         private string _comments;
 
+        
+        private string _postedDate;
+
+        private string _madeHot;
+
 
         public string Name { get => _name;  }
         public string Price { get => _price; }
@@ -43,10 +48,10 @@ namespace Hotukdeal
         public string DirectLink { get => _directLink; }
         public string HotMeter { get => _hotMeter; }
         public string Comments { get => _comments; }
+        public string PostedDate { get => _postedDate; }
+        public string MadeHot { get => _madeHot;}
 
-
-        
-        public Deal(string name, string price, string category, string link, string merchantName, string directLink, string description, string imageLink, string hotMeter, string comments)
+        public Deal(string name, string price, string category, string link, string merchantName, string directLink, string description, string imageLink, string hotMeter, string comments, string postedDate, string madeHot)
         {
             _name = name;
             _price = price;
@@ -58,10 +63,12 @@ namespace Hotukdeal
             _imageLink = imageLink;
             _hotMeter = hotMeter;
             _comments = comments;
+            _postedDate = postedDate;
+            _madeHot = madeHot;
         }
 
-  
-        
+
+
 
 
     }

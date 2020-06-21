@@ -26,9 +26,11 @@ namespace Hotukdeal
 
         }
 
-        public void scrape()
+        public Hotukdeals Scrape()
         {
             var deals = page.DocumentNode.SelectNodes("//*[@class='threadGrid']");
+
+            Hotukdeals hotukdeals = new Hotukdeals();
             
             foreach (var deal in deals)
             {      // check if the title is not null otherwise skip it
@@ -65,17 +67,29 @@ namespace Hotukdeal
 
                     var madeHotDate = deal.SelectSingleNode(".//span[@class ='hide--toW3']").InnerText;
 
-                   
+                    
+                    Deal aDeal = new DealBuilder()
+                    .Name(title)
+                    .Link(link)
+                    .ImageLink(imageLink)
+                    .Price(price)
+                    .Description(description)
+                    .HotMeter(hotMeters)
+                    .MerchantName(merchantName)
+                    .DirectLink(directLink)
+                    .Comment(commentCounts)
+                    .MadeHot(madeHotDate)
+                    .Build();
 
+                    hotukdeals.addDeal(aDeal);
 
                     }
 
-
                 }
 
-
             }
-
+        
+            return hotukdeals;
 
         }
 
