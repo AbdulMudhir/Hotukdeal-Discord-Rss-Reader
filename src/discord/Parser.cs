@@ -11,7 +11,7 @@ namespace Parse
 
 
         
-        public static string getDealForumThreadNumber(string url)
+        public static string forumNumber(string url)
         {
             return Regex.Match(url, "\\d+$").Value;
 
@@ -41,11 +41,9 @@ namespace Parse
 
         
         public static string getDirectLink(string url)
-        {
-             string baseDirectLink = "https://www.hotukdeals.com/visit/thread/";
-            
+        {            
 
-            return "str";
+            return $"https://www.hotukdeals.com/visit/thread/{forumNumber(url)}";
         }
 
 

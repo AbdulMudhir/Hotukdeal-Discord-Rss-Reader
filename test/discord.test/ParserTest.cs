@@ -17,7 +17,7 @@ namespace discord.Test
 
             string normalUrl = "https://www.hotukdeals.com/deals/playmobil-70317-back-to-the-futurec-delorean-toy-3490437";
            
-            string threadNumber = Parser.getDealForumThreadNumber(normalUrl);
+            string threadNumber = Parser.forumNumber(normalUrl);
 
             Assert.Equal("3490437", threadNumber);
 
@@ -31,6 +31,17 @@ namespace discord.Test
             Assert.Equal("£2,851.38 - Amazon",description);
         }
 
+
+        [Fact]
+        public void directLink()
+        {
+            string normalUrl = "https://www.hotukdeals.com/deals/playmobil-70317-back-to-the-futurec-delorean-toy-3490437";
+            string directLink = "https://www.hotukdeals.com/visit/thread/3490437";
+
+            Assert.Equal(directLink, Parser.getDirectLink(normalUrl));
+
+
+        } 
 
 
 

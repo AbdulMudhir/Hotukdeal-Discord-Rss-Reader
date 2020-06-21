@@ -21,11 +21,6 @@ namespace discord.Test
 
 
             int totalDeal =  hotukdeals.Total;
-
-            // should recieve 20 feed from RSS
-            //Assert.Equal(20, totalDeal);
-
-
             
         }
 
