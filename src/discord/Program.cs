@@ -32,15 +32,11 @@ namespace discord
             }
         }
 
-        HotukdealScraper scraper;
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
         public async Task MainAsync()
         {
 
             _client = new DiscordSocketClient();
-
-
-            scraper = new HotukdealScraper("https://www.hotukdeals.com/tag/gaming");
 
 
             _client.Log += Log;
@@ -65,24 +61,113 @@ namespace discord
         private async Task OnReady()
         {
 
-            Timer timer = new Timer(3600000);
-            timer.Elapsed += PostDeal;
+
+
+            Timer timer = new Timer(2000);
+            timer.Elapsed += initiateHotUkDeal;
             timer.Enabled = true;
+            timer.AutoReset = false;
+
+
+
+        }
+
+        private void initiateHotUkDeal(Object source, ElapsedEventArgs e)
+        {
+
+            GatherChannelMessage();
+
+
+        }
+
+        public async Task GatherChannelMessage()
+        {
+
+            const ulong channelId = 724405572400840794;
+
+            var channel = (SocketTextChannel)_client.GetChannel(channelId);
+            var messages = (IReadOnlyCollection<IMessage>)await channel.GetMessagesAsync(100).FlattenAsync();
+
+            var hotukdeal = new HotukdealScraper("https://www.hotukdeals.com/tag/gaming").Hotukdeal();
+
+
+            if (messages.Count != 0)
+            {
+
+               clearExpiredDeal(messages, hotukdeal);
+            }
+
+            else
+            {
+                
+               // await PostDeals(hotukdeal, channel);
+
+            }
+
+
+
+
+        }
+
+        private Hotukdeals clearExpiredDeal(IReadOnlyCollection<IMessage> messages,Hotukdeals hotukdeals)
+        {   
+        
+
+            bool dealExist = false;
+            // check all messages sent in the channel
+            foreach(var message in messages)
+            {       // all messages were sent as embeds before, only need to check titles
+                foreach(var embed in message.Embeds)
+                {
+                    var title = embed.Title;
+                    // check the altest deals scraped and comapre
+                   foreach(var deal in hotukdeals.deals)
+                   {
+
+                       //System.Console.WriteLine(title);
+
+                       var name = deal.Name;
+                        // if the deal exist, just ignore it and break out loop
+                       if(title.Equals(name))
+                       {
+                           dealExist =  true;
+                           hotukdeals.removeDeal(deal);
+                           break;
+
+                       }
+                       else{
+                           dealExist = false;
+                       }
+
+                   }
+                    // if it no longer exist on the hotukdeal, means the deal expired so free to delete message
+                   if(!dealExist)
+                   {
+                       message.DeleteAsync();
+                   }
+
+
+                    
+
+
+                }
+
+            }
+
+            return hotukdeals;
 
 
         }
 
 
-        private void PostDeal(Object source, ElapsedEventArgs e)
+
+
+        private async Task PostDeals(Hotukdeals hotukdeals, SocketTextChannel channel)
         {
-            ulong channelId = 724405572400840794;
-
-            var channel = (SocketTextChannel)_client.GetChannel(channelId);
 
 
-            var deals = new HotukdealScraper("https://www.hotukdeals.com/tag/broadband-phone-service").Hotukdeal().deals;
 
-            foreach (Deal deal in deals)
+            foreach (Deal deal in hotukdeals.deals)
 
             {
 
@@ -110,7 +195,9 @@ namespace discord
 
 
 
-                channel.SendMessageAsync(embed: embed.Build());
+                await channel.SendMessageAsync(embed: embed.Build());
+
+                Task.Delay(2000);
             }
         }
 

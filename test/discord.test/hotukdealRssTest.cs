@@ -17,11 +17,23 @@ namespace discord.Test
         public void RssFeedCount()
         {
             
-                  Hotukdeals hotukdeals = hotUKDealRss.hotukdeals();
+                  Hotukdeals hotukdeals = hotUKDealRss.Hotukdeal();
 
 
             int totalDeal =  hotukdeals.Total;
+
+            Assert.Equal(20, totalDeal);
+
+            Deal deal = new DealBuilder()
+            .Name("UnitTest")
+            .Build();
+
+            hotukdeals.addDeal(deal);
+
+            totalDeal = hotukdeals.Total;
             
+            Assert.Equal(21, totalDeal);
+
         }
 
 
@@ -30,7 +42,7 @@ namespace discord.Test
         [Fact]
         public void RssFeedItem()
         {
-            Hotukdeals hotukdeals = hotUKDealRss.hotukdeals();
+            Hotukdeals hotukdeals = hotUKDealRss.Hotukdeal();
             Deal deal = hotukdeals.deals[0];
 
             String firstItemName = deal.Name;

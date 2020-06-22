@@ -47,7 +47,7 @@ namespace Hotukdeal
 
 
                     var titleNode = deal.SelectSingleNode(".//a[@class ='cept-tt thread-link linkPlain thread-title--list' ]");
-                    var title = HttpUtility.HtmlDecode(titleNode.InnerText);
+                    var title = HttpUtility.HtmlDecode(titleNode.InnerText).Trim();
                     var link = titleNode.Attributes["href"].Value;
 
                     // by pass the lazy load images
@@ -61,8 +61,7 @@ namespace Hotukdeal
 
                     
                     var hotMeters = hotMeter(deal);
-
-                    var merchantName = deal.SelectSingleNode(".//span[@class='cept-merchant-name text--b text--color-brandPrimary link']").InnerText;
+                    var merchantName = getMerchantName(deal);
 
 
                     var directLink = Parser.getDirectLink(link);
@@ -99,6 +98,20 @@ namespace Hotukdeal
 
         }
 
+        private string getMerchantName(HtmlNode deal)
+        {
+            string merchantName;
+            try{
+                merchantName = deal.SelectSingleNode(".//span[@class='cept-merchant-name text--b text--color-brandPrimary link']").InnerText;
+
+            }
+            catch(NullReferenceException)
+            {
+                merchantName = "None";
+            }
+
+            return merchantName;
+        }
 
         private string getPrice(HtmlNode deal)
         {   string dealPrice;

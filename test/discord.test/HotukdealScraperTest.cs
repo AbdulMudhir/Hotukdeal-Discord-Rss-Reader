@@ -22,7 +22,7 @@ namespace discord.Test
 
         //Then
 
-        Assert.Equal(19, hotukdeals.Total);
+        Assert.Equal(20, hotukdeals.Total);
         }
 
 
