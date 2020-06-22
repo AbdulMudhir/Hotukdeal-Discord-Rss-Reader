@@ -34,6 +34,7 @@ namespace Hotukdeal
         private string _postedDate;
 
         private string _madeHot;
+        private string _categoryImage;
 
 
         public string Name { get => _name;  }
@@ -50,8 +51,9 @@ namespace Hotukdeal
         public string Comments { get => _comments; }
         public string PostedDate { get => _postedDate; }
         public string MadeHot { get => _madeHot;}
+        public string CategoryImage { get => _categoryImage;}
 
-        public Deal(string name, string price, string category, string link, string merchantName, string directLink, string description, string imageLink, string hotMeter, string comments, string postedDate, string madeHot)
+        public Deal(string name, string price, string category, string link, string merchantName, string directLink, string description, string imageLink, string hotMeter, string comments, string postedDate, string madeHot, string categoryImage)
         {
             _name = name;
             _price = price;
@@ -65,6 +67,7 @@ namespace Hotukdeal
             _comments = comments;
             _postedDate = postedDate;
             _madeHot = madeHot;
+            _categoryImage = categoryImage;
         }
 
 

@@ -26,7 +26,7 @@ namespace Hotukdeal
 
         
 
-        public  Hotukdeals hotukdeals()
+        public  Hotukdeals Hotukdeal()
         
         {   
             reader.Load(URL);

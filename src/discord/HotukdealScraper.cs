@@ -26,12 +26,17 @@ namespace Hotukdeal
 
         }
 
-        public Hotukdeals Scrape()
+        public Hotukdeals Hotukdeal()
         {
             var deals = page.DocumentNode.SelectNodes("//*[@class='threadGrid']");
 
             Hotukdeals hotukdeals = new Hotukdeals();
-            
+
+            var category = page.DocumentNode.SelectSingleNode("//*[@class='size--all-xxl text--b cept-nav-subheadline']").InnerText;
+
+            var categoryImage = page.DocumentNode.SelectSingleNode("//*[@class='img img--type-collection img--square-xl img--toW2-square-m img--noBorder boxShadow']").Attributes["src"].Value;
+
+
             foreach (var deal in deals)
             {      // check if the title is not null otherwise skip it
                 if (validDeal(deal))
@@ -40,16 +45,16 @@ namespace Hotukdeal
                     if(!expiredDeal(deal))
                     {
 
+
                     var titleNode = deal.SelectSingleNode(".//a[@class ='cept-tt thread-link linkPlain thread-title--list' ]");
                     var title = HttpUtility.HtmlDecode(titleNode.InnerText);
-
                     var link = titleNode.Attributes["href"].Value;
 
                     // by pass the lazy load images
                     var imageLink = $"https://images.hotukdeals.com/threads/thread_large/default/{Parser.forumNumber(link)}_1.jpg";
 
 
-                    var price = deal.SelectSingleNode(".//span[@class= 'thread-price text--b vAlign--all-tt cept-tp size--all-l size--fromW3-xl']").InnerText;
+                    var price = getPrice(deal);
 
                     var description = deal.SelectSingleNode(".//div[@class='cept-description-container overflow--wrap-break width--all-12  size--all-s size--fromW3-m']").InnerText;
                     description = description.Replace("Read more", "");
@@ -59,7 +64,6 @@ namespace Hotukdeal
 
                     var merchantName = deal.SelectSingleNode(".//span[@class='cept-merchant-name text--b text--color-brandPrimary link']").InnerText;
 
-                    System.Console.WriteLine(merchantName);
 
                     var directLink = Parser.getDirectLink(link);
 
@@ -79,6 +83,8 @@ namespace Hotukdeal
                     .DirectLink(directLink)
                     .Comment(commentCounts)
                     .MadeHot(madeHotDate)
+                    .Category(category)
+                    .CategoryImage(categoryImage)
                     .Build();
 
                     hotukdeals.addDeal(aDeal);
@@ -91,6 +97,29 @@ namespace Hotukdeal
         
             return hotukdeals;
 
+        }
+
+
+        private string getPrice(HtmlNode deal)
+        {   string dealPrice;
+
+            try{
+
+                dealPrice = deal.SelectSingleNode(".//span[@class= 'thread-price text--b vAlign--all-tt cept-tp size--all-l size--fromW3-xl']").InnerText;
+            }
+
+            catch(NullReferenceException){
+               // when no price tag exist
+               try{
+                    dealPrice = HttpUtility.HtmlDecode(deal.SelectSingleNode(".//span[@class= 'hide--toW3 text--b cept-tp size--all-l size--fromW3-xl thread-price']").InnerText);
+               }
+               catch(NullReferenceException)
+               {
+                   dealPrice = "None";
+               }
+                
+            }
+            return dealPrice;
         }
 
         

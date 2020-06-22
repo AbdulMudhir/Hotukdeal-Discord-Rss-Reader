@@ -9,14 +9,14 @@ namespace discord.Test
 
     public class HotukdealScraperTest
     {   
-        HotukdealScraper hotUKDeal = new HotukdealScraper("https://www.hotukdeals.com/tag/gaming");
+        HotukdealScraper scraper = new HotukdealScraper("https://www.hotukdeals.com/tag/gaming");
 
         [Fact]
         public void TotalDealScraped()
         {
         //Given
 
-        Hotukdeals hotukdeals = hotUKDeal.Scrape();
+        Hotukdeals hotukdeals = scraper.Hotukdeal();
         
         //When
 
