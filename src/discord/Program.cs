@@ -95,9 +95,8 @@ namespace discord
             {
 
               Hotukdeals dealsNotPosted =  filterExpiredDeal(messages, hotukdeal);
-              await PostDeals(dealsNotPosted, channel);
 
-              
+              await PostDeals(dealsNotPosted, chan)
             }
 
             else
