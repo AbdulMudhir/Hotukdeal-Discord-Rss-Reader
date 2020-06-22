@@ -94,13 +94,16 @@ namespace discord
             if (messages.Count != 0)
             {
 
-               clearExpiredDeal(messages, hotukdeal);
+              Hotukdeals dealsNotPosted =  filterExpiredDeal(messages, hotukdeal);
+              await PostDeals(dealsNotPosted, channel);
+
+              
             }
 
             else
             {
                 
-               // await PostDeals(hotukdeal, channel);
+               await PostDeals(hotukdeal, channel);
 
             }
 
@@ -109,7 +112,7 @@ namespace discord
 
         }
 
-        private Hotukdeals clearExpiredDeal(IReadOnlyCollection<IMessage> messages,Hotukdeals hotukdeals)
+        private Hotukdeals filterExpiredDeal(IReadOnlyCollection<IMessage> messages,Hotukdeals hotukdeals)
         {   
         
 
@@ -142,18 +145,16 @@ namespace discord
                    }
                     // if it no longer exist on the hotukdeal, means the deal expired so free to delete message
                    if(!dealExist)
-                   {
+                   {   
+                       // delete the message as it's not needed
                        message.DeleteAsync();
                    }
-
-
-                    
 
 
                 }
 
             }
-
+            // return all the deals that were not posted
             return hotukdeals;
 
 
