@@ -9,10 +9,10 @@ using System.Timers;
 
 
 namespace discord
-{
+{   
+
     class Program
     {
-
 
         private DiscordSocketClient _client;
         private string TOKEN
@@ -20,8 +20,9 @@ namespace discord
             get
             {
 
-                string token = Environment.GetEnvironmentVariable("csharptoken");
-
+                //string token = Environment.GetEnvironmentVariable("csharptoken");
+                string token = Environment.GetEnvironmentVariable("hotukdealToken");
+               
                 if (String.IsNullOrEmpty(token))
                 {
                     throw new ArgumentNullException("Token Key not found on environment");
@@ -31,7 +32,13 @@ namespace discord
                 return token;
             }
         }
+        private const ulong channelID = 724405572400840794;
+        private const ulong rssChannelID = 653309444934860840;
+        private const ulong steamChannelID = 657687492228546573;
 
+        private HotukdealScraper steamHotukdeal = new HotukdealScraper("https://www.hotukdeals.com/tag/steam-hot");
+         private  HotUkDealRssReader hotUkDealRssReader = new HotUkDealRssReader();
+            
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
         public async Task MainAsync()
         {
@@ -59,44 +66,47 @@ namespace discord
 
 
         private async Task OnReady()
-        {
+        {   
+           
+           
+           
 
-
-
-            Timer timer = new Timer(2000);
+           
+            Timer  timer =  new Timer(1800000);
+           // timer.Elapsed += (sender, e) => initiateHotUkDeal(sender, e, channelID,hotukdeal);
             timer.Elapsed += initiateHotUkDeal;
-            timer.Enabled = true;
-            timer.AutoReset = false;
-
-
-
-        }
-
-        private void initiateHotUkDeal(Object source, ElapsedEventArgs e)
-        {
-
-            GatherChannelMessage();
+            //timer.AutoReset = false;
+            timer.Start();
 
 
         }
 
-        public async Task GatherChannelMessage()
+        
+        private async void initiateHotUkDeal(Object source , ElapsedEventArgs e){
+
+            await processHotUkDeal(steamChannelID, steamHotukdeal.Hotukdeal());
+            await processHotUkDeal(rssChannelID, hotUkDealRssReader.Hotukdeal());
+
+
+        }
+
+        private async Task processHotUkDeal(ulong channelID, Hotukdeals hotukdeal)
         {
+            
+            System.Console.WriteLine("loop");
 
-            const ulong channelId = 724405572400840794;
 
-            var channel = (SocketTextChannel)_client.GetChannel(channelId);
+            var channel = (SocketTextChannel)_client.GetChannel(channelID);
             var messages = (IReadOnlyCollection<IMessage>)await channel.GetMessagesAsync(100).FlattenAsync();
+          // await channel.DeleteMessagesAsync(messages);
 
-            var hotukdeal = new HotukdealScraper("https://www.hotukdeals.com/tag/gaming").Hotukdeal();
 
 
             if (messages.Count != 0)
             {
 
               Hotukdeals dealsNotPosted =  filterExpiredDeal(messages, hotukdeal);
-
-              await PostDeals(dealsNotPosted, chan)
+              await PostDeals(dealsNotPosted, channel);
             }
 
             else
@@ -110,6 +120,8 @@ namespace discord
 
 
         }
+
+
 
         private Hotukdeals filterExpiredDeal(IReadOnlyCollection<IMessage> messages,Hotukdeals hotukdeals)
         {   
@@ -189,15 +201,30 @@ namespace discord
                 };
 
                 embed.AddField("Price", deal.Price, true);
+
+
+                try{
                 embed.AddField("Hot Meter", deal.HotMeter, true);
                 embed.AddField("Comments", deal.Comments, true);
+    
+                }
+                catch(ArgumentException secondaryInfo){
+                    embed.AddField("Category ", deal.Category, true);
+                     embed.AddField("Merchant", deal.MerchantName, true);
+                    embed.Footer =  new EmbedFooterBuilder()
+                    .WithText($"{deal.PostedDate}");
+
+                   // Console.WriteLine(nameof(secondaryInfo) + " doesnt exist");
+
+                    
+                }
 
 
+                await Task.Delay(2000);
 
 
                 await channel.SendMessageAsync(embed: embed.Build());
 
-                Task.Delay(2000);
             }
         }
 

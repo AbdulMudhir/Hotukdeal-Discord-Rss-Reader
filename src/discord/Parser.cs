@@ -57,6 +57,7 @@ namespace Parse
                 string link = item.SelectSingleNode("link").InnerText;
                 string category = item.SelectSingleNode("category").InnerText;
                 string directLink = getDirectLink(link);
+                string datePosted = item.SelectSingleNode("pubDate").InnerText;
                 string merchantName;
                 string price;
                 // need to fix this as not all return nulls
@@ -68,6 +69,8 @@ namespace Parse
                     merchantName = merchantInfo["name"].Value;
 
                     price = merchantInfo["price"].Value;
+
+                    description = description.Replace(price+" -","");
 
 
 
@@ -93,6 +96,7 @@ namespace Parse
                  .ImageLink(imageLink)
                  .MerchantName(merchantName)
                  .DirectLink(directLink)
+                 .PostedDate(datePosted)
                  .Build();
                  
 
