@@ -15,6 +15,9 @@ namespace discord
     {
 
         private DiscordSocketClient _client;
+
+
+
         private string TOKEN
         {
             get
@@ -76,6 +79,8 @@ namespace discord
            // timer.Elapsed += (sender, e) => initiateHotUkDeal(sender, e, channelID,hotukdeal);
             timer.Elapsed += initiateHotUkDeal;
             //timer.AutoReset = false;
+              await processHotUkDeal(steamChannelID, steamHotukdeal.Hotukdeal());
+            await processHotUkDeal(rssChannelID, hotUkDealRssReader.Hotukdeal());
             timer.Start();
 
 
@@ -97,15 +102,15 @@ namespace discord
 
 
             var channel = (SocketTextChannel)_client.GetChannel(channelID);
-            var messages = (IReadOnlyCollection<IMessage>)await channel.GetMessagesAsync(100).FlattenAsync();
+            var messages = (IReadOnlyCollection<IMessage>)await channel.GetMessagesAsync(30).FlattenAsync();
           // await channel.DeleteMessagesAsync(messages);
 
 
 
             if (messages.Count != 0)
             {
-
-              Hotukdeals dealsNotPosted =  filterExpiredDeal(messages, hotukdeal);
+                // returns  the object tassk from ascyncron
+              Hotukdeals dealsNotPosted =  filterExpiredDeal(messages, hotukdeal).Result;
               await PostDeals(dealsNotPosted, channel);
             }
 
@@ -123,7 +128,7 @@ namespace discord
 
 
 
-        private Hotukdeals filterExpiredDeal(IReadOnlyCollection<IMessage> messages,Hotukdeals hotukdeals)
+        private async Task<Hotukdeals> filterExpiredDeal(IReadOnlyCollection<IMessage> messages,Hotukdeals hotukdeals)
         {   
         
 
@@ -158,7 +163,8 @@ namespace discord
                    if(!dealExist)
                    {   
                        // delete the message as it's not needed
-                       message.DeleteAsync();
+                       await Task.Delay(2000);
+                       await message.DeleteAsync();
                    }
 
 
@@ -218,7 +224,6 @@ namespace discord
 
                     
                 }
-
 
                 await Task.Delay(2000);
 
